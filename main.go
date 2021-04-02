@@ -2,6 +2,7 @@ package main
 
 import ("fmt"
         "net/http"
+        "html/template"
        )
 
 
@@ -17,20 +18,15 @@ func (u User) getAllInfo() string {
   return fmt.Sprintf("User name is: %s Hi is %d and he has money"+
     "equal: %d", u.name, u.age, u.money)
 }
-//если структура большая, то передавть обЪект даже если мы его не измеяем
-//стоит по ссылке - *User
+
 func (u *User) setNewName(newName string){
   u.name = newName
 }
 
 func home_page(w http.ResponseWriter, r *http.Request){
-  bob := User{"Bob",25,50, 4.3, 0.8}
-  bob.name = "Alex"
-  bob.setNewName("God")
-  fmt.Fprintf(w, `<b>Main Text</b>
-    <p>Main Text</p>
-    <p>Main Text</p>`)
-  fmt.Fprintf(w, bob.getAllInfo())
+   bob := User{"Bob",25,50, 4.3, 0.8}
+  tmpl, _ := template.ParseFiles("templates/home_page.html")
+  tmpl.Execute(w, bob)
 
 }
 
