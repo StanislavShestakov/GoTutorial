@@ -27,7 +27,11 @@ func home_page(w http.ResponseWriter, r *http.Request){
   bob := User{"Bob",25,50, 4.3, 0.8}
   bob.name = "Alex"
   bob.setNewName("God")
+  fmt.Fprintf(w, `<b>Main Text</b>
+    <p>Main Text</p>
+    <p>Main Text</p>`)
   fmt.Fprintf(w, bob.getAllInfo())
+
 }
 
 func contacts_page(w http.ResponseWriter, r *http.Request){
