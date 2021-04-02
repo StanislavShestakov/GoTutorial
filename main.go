@@ -7,24 +7,24 @@ import ("fmt"
 
 
 type User struct {
-  name string
-  age uint16
-  money int16
-  avg_grades, happines float64
-
+  Name string
+  Age uint16
+  Money int16
+  Avg_grades, Happines float64
+  Hobbies []string
 }
 
 func (u User) getAllInfo() string {
   return fmt.Sprintf("User name is: %s Hi is %d and he has money"+
-    "equal: %d", u.name, u.age, u.money)
+    "equal: %d", u.Name, u.Age, u.Money)
 }
 
 func (u *User) setNewName(newName string){
-  u.name = newName
+  u.Name = newName
 }
 
 func home_page(w http.ResponseWriter, r *http.Request){
-   bob := User{"Bob",25,50, 4.3, 0.8}
+   bob := User{"Bob",25,50, 4.3, 0.8,[]string{"SC2", "Java", "rest"}}
   tmpl, _ := template.ParseFiles("templates/home_page.html")
   tmpl.Execute(w, bob)
 
